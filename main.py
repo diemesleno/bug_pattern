@@ -1,12 +1,22 @@
 #!/usr/bin/env python2
 
+import sys
+
+if sys.version_info >= (3, 0):
+	def xrange(*args, **kwargs):
+		""" 
+        If using with Python 3, the xrange will
+        use the range function.
+		"""
+		return iter(range(*args, **kwargs))
+
 
 def to_matrix(file_path):
     """
-    Get the file with the bug pattern and transform it in
+    Get a file and transform it in
     a tuple with a matrix of characters.
 
-    :param file_path: the path to the file with the pattern
+    :param file_path: the path to the file
 
     :return tuple: with the matrix of characters
     """
@@ -39,12 +49,14 @@ def count_pattern(needle_file, haystack_file):
 
     column_indexes = tuple(
         (index, index + needle_columns)
-        for index in range(0, haystack_columns - needle_columns + 1)
+        # Change from range to xrange because in Python2 the range function pre-create all elements in memory
+        for index in xrange(0, haystack_columns - needle_columns + 1)
     )
 
     row_indexes = tuple(
         (index, index + needle_rows)
-        for index in range(0, haystack_rows - needle_rows + 1)
+        # Change from range to xrange because in Python2 the range function pre-create all elements in memory
+        for index in xrange(0, haystack_rows - needle_rows + 1)
     )
 
     for row_start, row_end in row_indexes:
