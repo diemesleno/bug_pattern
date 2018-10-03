@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 
+*.pyc
+
 # Temporary files
 *.*~
 
@@ -68,4 +70,5 @@ target/
 
 # Docs
 *.pdf
+*.docx
 ori/
